@@ -1,10 +1,10 @@
 import { Button } from '@material-ui/core';
 import React from 'react';
 
-const ButtonComp = () => {
+const ButtonComp = ({ children, className }) => {
   return (
     <div>
-      <Button>Add Todo</Button>
+      <Button className={className}>{children || 'btn'}</Button>
     </div>
   );
 };
