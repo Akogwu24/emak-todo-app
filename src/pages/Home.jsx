@@ -2,18 +2,18 @@ import { Container } from '@material-ui/core';
 import React from 'react';
 import Header from '../components/Header';
 import { makeStyles } from '@material-ui/core';
+import TodoList from '../components/TodoList';
 
 const useStyles = makeStyles({
-  container: {
-    background: 'red',
-  },
+  container: {},
 });
 
 const Home = () => {
   const classes = useStyles();
   return (
-    <Container className={classes.container}>
+    <Container>
       <Header />
+      <TodoList />
     </Container>
   );
 };

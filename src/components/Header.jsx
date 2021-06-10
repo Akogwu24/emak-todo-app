@@ -1,5 +1,7 @@
+import React, { useState } from 'react';
 import {
   AppBar,
+  Button,
   Container,
   InputAdornment,
   TextField,
@@ -7,13 +9,13 @@ import {
   Typography,
 } from '@material-ui/core';
 import { SearchOutlined } from '@material-ui/icons';
-import React from 'react';
+
 import ButtonComp from './utils/ButtonComp';
 import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles({
   logo: {
-    fontSize: '2rem',
+    fontSize: '3rem',
   },
   navbar: {
     color: '',
@@ -28,17 +30,17 @@ const useStyles = makeStyles({
   btnStyles: {
     color: '#0b1863',
     fontSize: '1.8rem',
+    fontWeight: 'bold',
     backgroundColor: 'white',
   },
   searchBar: {
-    // width: '80%',
+    backgroundColor: '#7aafec',
     display: 'flex',
     height: '4rem',
     justifyContent: 'space-between',
   },
 
   myInput: {
-    // backgroundColor: '#7aafec',
     borderRadius: '5px',
     width: '20rem',
     display: 'flex',
@@ -49,20 +51,34 @@ const useStyles = makeStyles({
     '&::placeholder': {
       color: 'white',
       fontSize: '2rem',
-      // width: '100%',
     },
+  },
+  btnContainer: {
+    marginTop: '8rem',
+    '& button': {
+      width: '10rem',
+      marginRight: '3rem',
+      fontSize: '1.8rem',
+      padding: '5px 2rem',
+    },
+  },
+  activeBtn: {
+    backgroundColor: '#004374',
+    color: '#fff',
   },
 });
 
 const Header = () => {
   const classes = useStyles();
+  const [currView, setCurrView] = useState('all');
 
   return (
-    <AppBar position='fixed' className={classes.navbar}>
-      <Toolbar>
-        <Container className={classes.headerContent}>
-          <Typography className={classes.logo}>Emak</Typography>
-          <form className={classes.searchBar}>
+    <>
+      <AppBar position='fixed' className={classes.navbar}>
+        <Toolbar>
+          <Container className={classes.headerContent}>
+            <Typography className={classes.logo}>Emak</Typography>
+            {/* <form className={classes.searchBar}>
             <TextField
               id='outlined-basic'
               variant='filled'
@@ -76,11 +92,35 @@ const Header = () => {
                 ),
               }}
             />
-          </form>
-          <ButtonComp className={classes.btnStyles}>Add To Do</ButtonComp>
-        </Container>
-      </Toolbar>
-    </AppBar>
+          </form> */}
+            <ButtonComp className={classes.btnStyles}>Add To Do</ButtonComp>
+          </Container>
+        </Toolbar>
+      </AppBar>
+      <div className={classes.btnContainer}>
+        <Button
+          onClick={() => setCurrView('all')}
+          variant='contained'
+          className={currView === 'all' ? classes.activeBtn : classes.btn}
+        >
+          All
+        </Button>
+        <Button
+          onClick={() => setCurrView('done')}
+          variant='contained'
+          className={currView === 'done' ? classes.activeBtn : classes.btn}
+        >
+          Done
+        </Button>
+        <Button
+          onClick={() => setCurrView('pending')}
+          variant='contained'
+          className={currView === 'pending' ? classes.activeBtn : classes.btn}
+        >
+          Pending
+        </Button>
+      </div>
+    </>
   );
 };
 
